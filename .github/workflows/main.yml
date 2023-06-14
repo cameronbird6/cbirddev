@@ -37,11 +37,11 @@ jobs:
           push: true
           branch: deploy
 
-  deploy:
-    name: Deploy to production
-    uses: appleboy/ssh-action@v0.1.10
-    with:
-      username: ${{ secrets.ssh_username }}
-      host: ${{ secrets.ssh_host }}
-      key: ${{ secrets.ssh_private_key }}
-      script: 'cd ${{ secrets.deploy_path }} && ./server_deploy.sh'
+#  deploy:
+#    name: Deploy to production
+#    uses: appleboy/ssh-action@v0.1.10
+#    with:
+#      username: ${{ secrets.ssh_username }}
+#      host: ${{ secrets.ssh_host }}
+#      key: ${{ secrets.ssh_private_key }}
+#      script: 'cd ${{ secrets.deploy_path }} && ./server_deploy.sh'
