@@ -1,0 +1,36 @@
+name: CD
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - run: npm run production
+      - name: Commit built assets
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout -B master
+          git add -f public/
+          git commit -m "Build front-end assets"
+          git push -f origin deploy
+#      - name: Deploy to production
+#        uses: appleboy/ssh-action@master
+#        with:
+#          username: ${{ secrets.ssh_username }}
+#          host: ${{ secrets.ssh_host }}
+#          key: ${{ secrets.ssh_private_key }}
+#          script: 'cd ${{ secrets.deploy_path }} && ./server_deploy.sh'
