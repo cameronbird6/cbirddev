@@ -36,7 +36,6 @@ jobs:
           message: 'Build assets'
           pull: master
           push: origin deploy --force
-          branch: deploy
 
 #  deploy:
 #    name: Deploy to production
