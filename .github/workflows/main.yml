@@ -34,7 +34,8 @@ jobs:
           committer_name: GitHub Actions
           committer_email: actions@github.com
           message: 'Build assets'
-          push: true
+          pull: master
+          push: origin deploy --force
           branch: deploy
 
 #  deploy:
